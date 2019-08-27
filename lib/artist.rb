@@ -5,7 +5,6 @@ class Artist
 
   def initialize(name)
     @name = name 
-    @songs = []
     @@all << self
   end 
 
@@ -14,12 +13,20 @@ class Artist
   end
 
   def self.find_or_create_by_name(artist_name) 
-  #    if self.all.find{|artist_obj| artist_obj.name == artist_name}
-  #     self.all.find{|artist_obj| artist_obj.name == artist_name}
-  #    else
-  #     self.new(artist_name) 
-  #    end
-    self.all.find{|artist_obj| artist_obj.name == artist_name} || Artist.new(artist_name)
+    #  if self.find(artist_name)
+    #   self.find(artist_name)
+    #  else
+    #   self.create(artist_name) 
+    #  end
+     self.find(artist_name)|| self.create(artist_name) 
+  end
+
+  def self.find(artist_name)
+    self.all.find{|artist_obj| artist_obj.name == artist_name}
+  end
+
+  def self.create(artist_name)
+    Artist.new(artist_name)
   end
 
   def print_songs
